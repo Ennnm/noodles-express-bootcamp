@@ -15,11 +15,26 @@ const handleRecipes = (req, res)=>
         const recipe = content.recipes[recipeIdx];
         res.send(recipe);
      }
+  })
+}
 
+const handleYieldReq = (req, res) =>{
+  read('data.json', (err, content)=>{
+    const yieldReq = Number(req.params.yield);
+    if(Number.isNaN(yieldReq))
+    {
+      res.status(404).send('Sorry, that is not a number!');
+    }
+    else{
+      const recipes = content.recipes;
+      const recipeYield = recipes.filter(recipe => recipe.yield === yieldReq);
+      res.send(recipeYield);
+    }
   })
 }
 
 
 
 app.get('/recipe/:index', handleRecipes);
+app.get('/yield/:yield', handleYieldReq)
 app.listen(3004);
