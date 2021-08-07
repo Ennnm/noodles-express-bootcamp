@@ -1,6 +1,7 @@
 {
   "name": "noodles-express-swe1",
   "version": "1.0.0",
+  "module": "type",
   "description": "# base-node-swe1",
   "main": "index.js",
   "scripts": {
