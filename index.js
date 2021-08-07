@@ -32,9 +32,18 @@ const handleYieldReq = (req, res) =>{
     }
   })
 }
-
+const handleByLabel = (req, res) =>{
+  read ('data.json', (err, content) =>{
+    const kebabLabel = req.params.label;
+    const cleanLabel = kebabLabel.replace( /-/g, ' ');
+    const recipes = content.recipes;
+    const selectedRecipes = recipes.filter( x => x.label.toLowerCase()=== cleanLabel.toLowerCase());
+    res.send(selectedRecipes);
+  })
+}
 
 
 app.get('/recipe/:index', handleRecipes);
 app.get('/yield/:yield', handleYieldReq)
+app.get('/recipe-label/:label', handleByLabel);
 app.listen(3004);
